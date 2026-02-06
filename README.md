@@ -32,9 +32,9 @@ This project is being developed as an open-source collaborative effort, with a f
 
 ## Contributing 
 We welecome contributions of all kinds:
-    - **Bug reports** - [Open an issue](https://github.com/ossd-s26/affirmME/issues)
-    - **Code Contributions** - Fork, code, submit PR
-    - **Documentation** - Help us improve the docs
+- **Bug reports** - [Open an issue](https://github.com/ossd-s26/affirmME/issues)
+- **Code Contributions** - Fork, code, submit PR
+- **Documentation** - Help us improve the docs
 
 Please refer to the [CONTRIBUTING.md](CONTRIBUTING.md) document to see the guidelines.
 
