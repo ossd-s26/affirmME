@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="todo.css">
+</head>
+<body>
+  <div class="container">
+    <input id="list-title" class="title-input" value="To-do List" aria-label="List title" />
+    <form id="add-form">
+      <input id="new-task" type="text" />
+      <button id="add-btn" type="submit">Add</button>
+    </form>
+    <ul id="tasks"></ul>
+    <div class="footer">
+      <button id="clear-completed">Clear Completed</button>
+    </div>
+  </div>
+  <script src="todo.js" defer></script>
+</body>
+</html>
