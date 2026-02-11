@@ -29,7 +29,7 @@ We welcome contributions of all kinds, including bug fixes, feature ideas, docum
     - Why the changes were necessary
 4. Ensure your code follows the project structure and is easy to understand.
 
-## Contrubutuion Guidelines 
+## Contribution Guidelines 
 - Write clear and readable code.
 - Use meaningful variable and function names.
 - Keep pull requests focused on a single feature or fix.
