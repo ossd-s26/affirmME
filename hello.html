@@ -11,7 +11,11 @@
     <!-- Header -->
     <div class="header">
       <h1>Daily Checklist</h1>
-      <div class="date-display" id="dateDisplay"></div>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div class="date-display" id="dateDisplay"></div>
+        <div id="progressSummary" style="font-size:13px; color:var(--muted);">0/0</div>
+        <div id="streakDisplay" style="font-size:13px; color:var(--accent);">🔥 0</div>
+      </div>
     </div>
 
     <!-- Status Banner -->
@@ -20,8 +24,14 @@
       <span id="statusMessage"></span>
     </div>
 
-    <!-- Main Content -->
-    <div class="main-content">
+    <!-- Loading / setup screen (hidden once model is ready) -->
+    <div id="loadingView" style="display:none; padding:16px; text-align:center;">
+      <div style="font-weight:600; margin-bottom:8px;">Setting up AI coach…</div>
+      <div id="downloadPct">0%</div>
+    </div>
+
+    <!-- Main Content (app) - hidden until model is ready -->
+    <div id="appView" class="main-content" style="display:none;">
       <!-- Input Section -->
       <div class="input-section">
         <input
@@ -31,6 +41,7 @@
           aria-label="Add a new task"
         >
         <button class="btn add-btn" id="addBtn" aria-label="Add task">Add</button>
+        <button class="btn affirm-btn" id="affirmBtn" aria-label="Generate affirmation">Affirmations</button>
       </div>
 
       <!-- Task List -->

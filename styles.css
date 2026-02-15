@@ -94,6 +94,7 @@ body {
 
 .input-section {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   margin-bottom: 16px;
   background: white;
@@ -149,6 +150,13 @@ body {
       cursor: not-allowed;
       transform: none;
     }
+  }
+
+  &.affirm-btn {
+    background-color: #34a853;
+    color: white;
+    padding: 6px 10px;
+    font-size: 13px;
   }
 
   &.clear-btn {
