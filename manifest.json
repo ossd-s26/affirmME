@@ -1,0 +1,14 @@
+{
+  "name": "Daily Affirmation Checklist",
+  "description": "Track your daily tasks and get AI-powered affirmations",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": ["storage", "alarms"],
+  "action": {
+    "default_popup": "hello.html",
+    "default_icon": "hello_extensions.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

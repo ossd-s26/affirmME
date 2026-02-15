@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Affirmation Checklist</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>Daily Checklist</h1>
+      <div class="date-display" id="dateDisplay"></div>
+    </div>
+
+    <!-- Status Banner -->
+    <div class="status-banner" id="statusBanner">
+      <span class="spinner" id="statusSpinner"></span>
+      <span id="statusMessage"></span>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Input Section -->
+      <div class="input-section">
+        <input
+          type="text"
+          id="taskInput"
+          placeholder="Add a new task..."
+          aria-label="Add a new task"
+        >
+        <button class="btn add-btn" id="addBtn" aria-label="Add task">Add</button>
+      </div>
+
+      <!-- Task List -->
+      <div class="task-list" id="taskList"></div>
+
+      <!-- Empty State -->
+      <div class="empty-state" id="emptyState">
+        <p>📝 No tasks yet</p>
+        <p style="font-size: 12px;">Add a task to get started!</p>
+      </div>
+
+      <!-- Affirmation Section -->
+      <div class="affirmation-section" id="affirmationSection">
+        <div class="affirmation-title">✨ Your affirmation</div>
+        <div class="affirmation-text" id="affirmationText"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <button class="btn clear-btn footer-btn" id="clearBtn">Clear All</button>
+    </div>
+  </div>
+
+  <!-- Scripts: Load in order (storage → gemini → popup) -->
+  <script src="storage.js"></script>
+  <script src="gemini-api.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
