@@ -55,9 +55,11 @@ class ChecklistApp {
     document
       .getElementById("clearBtn")
       .addEventListener("click", () => this.handleClearAll());
-    const affirmBtn = document.getElementById('affirmBtn');
+    const affirmBtn = document.getElementById("affirmBtn");
     if (affirmBtn) {
-      affirmBtn.addEventListener('click', () => this.generateAndDisplayAffirmation());
+      affirmBtn.addEventListener("click", () =>
+        this.generateAndDisplayAffirmation(),
+      );
     }
   }
 
@@ -79,12 +81,60 @@ class ChecklistApp {
         "AI affirmations unavailable. Checklist still works!",
         false,
       );
-    } else if (availability === "after-download") {
+    } else if (
+      availability === "after-download" ||
+      availability === "downloadable"
+    ) {
+      // Many platforms require a real user gesture to initiate the on-device
+      // model download. Starting the session without a gesture will raise
+      // NotAllowedError. Instead, show a banner with a button the user can
+      // click to start the download (this click satisfies the gesture).
       this.showStatusBanner(
         "info",
-        "Downloading AI model... This may take a while.",
-        true,
+        "AI model available to download. Click 'Start AI download' to begin.",
+        false,
       );
+
+      // Remove any previous start button
+      const prev = document.getElementById("startAIDownloadBtn");
+      if (prev) prev.remove();
+
+      const banner = document.getElementById("statusBanner");
+      const btn = document.createElement("button");
+      btn.id = "startAIDownloadBtn";
+      btn.className = "btn";
+      btn.textContent = "Start AI download";
+
+      btn.addEventListener("click", async () => {
+        btn.disabled = true;
+        // Show loading UI and attach progress/ready listeners BEFORE
+        // starting the session so we capture progress events and the
+        // final ready event dispatched by GeminiAPI.initSession().
+        this.showLoading();
+        try {
+          // This call is now made from a user gesture (click)
+          await GeminiAPI.initSession();
+          console.log(
+            "[App.checkAPIStatus] Gemini initSession completed (user gesture)",
+          );
+          // session creation resolved; the ready event should have been
+          // handled by the loading listeners and showApp() called.
+          // Remove start button if still present.
+          const sbtn = document.getElementById("startAIDownloadBtn");
+          if (sbtn) sbtn.remove();
+        } catch (err) {
+          console.error("[App.checkAPIStatus] Gemini initSession failed:", err);
+          this.showStatusBanner(
+            "error",
+            "Failed to download AI model: " +
+              (err && err.message ? err.message : "unknown error"),
+            false,
+          );
+          btn.disabled = false;
+        }
+      });
+
+      banner.appendChild(btn);
     }
   }
 
