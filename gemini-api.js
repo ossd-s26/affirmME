@@ -48,7 +48,15 @@ and progress. Be warm and genuine.`,
     expectedContextLanguages: ['en', 'ja', 'es'],
     monitor(m) {
       m.addEventListener('downloadprogress', (e) => {
-        console.log(`Downloaded ${e.loaded * 100}%`);
+        const pct = e.loaded * 100;
+        console.log(`Downloaded ${pct}%`);
+        try {
+          if (typeof window !== 'undefined' && window.dispatchEvent) {
+            window.dispatchEvent(new CustomEvent('gemini-download-progress', { detail: pct }));
+          }
+        } catch (err) {
+          console.warn('[GeminiAPI] Could not dispatch progress event', err);
+        }
       });
   }},
  
@@ -131,6 +139,15 @@ and progress. Be warm and genuine.`,
       // NOTE: This call triggers the download if availability === 'downloadable'
       this.session = await Summarizer.create(this.CREATE_OPTIONS);
 
+      // Notify UI that model is ready (create resolved)
+      try {
+        if (typeof window !== 'undefined' && window.dispatchEvent) {
+          window.dispatchEvent(new CustomEvent('gemini-model-ready'));
+        }
+      } catch (err) {
+        console.warn('[GeminiAPI] Could not dispatch ready event', err);
+      }
+
       clearTimeout(timeoutWarning); // Download finished before timeout
 
       const elapsedSeconds = Math.round((Date.now() - startTime) / 1000);
@@ -182,6 +199,13 @@ and progress. Be warm and genuine.`,
 
         if (availability === 'readily') {
           console.log(`[GeminiAPI] ✓ Model available for language server (after ${elapsedSeconds}s)`);
+          try {
+            if (typeof window !== 'undefined' && window.dispatchEvent) {
+              window.dispatchEvent(new CustomEvent('gemini-model-ready'));
+            }
+          } catch (err) {
+            console.warn('[GeminiAPI] Could not dispatch ready event from poll', err);
+          }
           return {
             available: true,
             status: 'ready',
