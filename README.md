@@ -9,8 +9,8 @@ This project is being developed as an open-source collaborative effort, with a f
 
 1. The user opens the extension and views their task list.
 2. The user adds tasks to the checklist.
-3. When a task is marked as complete, the task text is sent to our in memory storage.
-4. When the user clicks the affirmation button, the LLM generates a personalized affirmation based on the completed tasks.
+3. When a task is marked as complete, the task text is sent to our in-memory storage.
+4. After the task text is sent to in-memory storage, the LLM then generates a personalized affirmation based on the completed tasks.
 5. The affirmation is displayed instantly within the browser extension to encourage continued productivity.
 
 ## LLM Integration
